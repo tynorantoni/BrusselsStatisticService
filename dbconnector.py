@@ -2,6 +2,7 @@ from configparser import ConfigParser
 import psycopg2
 
 
+# get credentials to connect
 def config(filename='database.ini', section='postgresql'):
     try:
         parser = ConfigParser()
@@ -20,6 +21,7 @@ def config(filename='database.ini', section='postgresql'):
         print(error)
 
 
+# connect using data from config function
 def connect_to_db():
     conn = None
     try:
@@ -30,7 +32,3 @@ def connect_to_db():
 
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-
-#
-# if __name__ == '__main__':
-#     connect_to_db()

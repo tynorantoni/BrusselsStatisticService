@@ -6,7 +6,7 @@ import datetime
 
 from jsonmanipulation import insert_all_data
 
-
+#sets scheduled job for function
 class Config(object):
     JOBS = [
         {
@@ -21,22 +21,27 @@ class Config(object):
 
 
 def get_json_from_api():
-    # yesterday = datetime.today() - datetime.timedelta(days=1)
-    # insert_all_data(yesterday,yesterday)
-    pass
+    yesterday = datetime.date.today() - datetime.timedelta(days=1)
+    insert_all_data(yesterday,yesterday)
 
 
 
 
+#start flask app
 app = Flask(__name__)
 app.config.from_object(Config())
 api = Api(app)
+
+#add 'ping' routing
 api.add_resource(PingPong, '/ping')
+
+#enable schedule trigerring
 scheduler = APScheduler()
-# it is also possible to enable the API directly
-# scheduler.api_enabled = True
 scheduler.init_app(app)
 scheduler.start()
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
 
