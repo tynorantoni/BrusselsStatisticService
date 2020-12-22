@@ -5,7 +5,7 @@ import requests
 from requests import RequestException
 
 from dbconnector import connect_to_db
-from dbmanipulation import insert_to_db, create_table
+from dbmanipulation import insert_to_db
 
 #returns list of all counters in brussels with ID
 def list_of_all_counters():
